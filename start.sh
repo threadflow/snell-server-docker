@@ -27,9 +27,9 @@ else
     echo "Using predefined PSK: ${PSK}"
 fi
 
-if [ -z ${OBFS} ]; then
-    OBFS=tls
-fi
+#if [ -z ${OBFS} ]; then
+#    OBFS=tls
+#fi
 
 echo "Generating new config..."
 echo "[snell-server]" >> ${CONF}
