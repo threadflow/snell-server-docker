@@ -35,6 +35,6 @@ echo "Generating new config..."
 echo "[snell-server]" >> ${CONF}
 echo "listen = 0.0.0.0:9102" >> ${CONF}
 echo "psk = ${PSK}" >> ${CONF}
-echo "obfs = ${OBFS}" >> ${CONF}
+# echo "obfs = ${OBFS}" >> ${CONF}
 
 run_bin
