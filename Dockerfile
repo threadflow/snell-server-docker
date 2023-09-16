@@ -1,4 +1,4 @@
-FROM jeanblanchard/alpine-glibc
+FROM redhat/ubi9
 
 ARG SNELL_VERSION="4.0.1"
 # ARG SNELL_URI="https://github.com/surge-networks/snell/releases/download/v2.0.0/snell-server-v2.0.0-linux-amd64.zip"
@@ -10,12 +10,12 @@ ENV TZ=UTC
 WORKDIR /tmp
 
 COPY start.sh /start.sh
-RUN apk add --update libstdc++ && rm -rf /var/cache/apk/* && \
+RUN yum update && yum install -y wget unzip && \
     wget https://dl.nssurge.com/snell/snell-server-v${SNELL_VERSION}-linux-amd64.zip && \
     unzip snell-server-v${SNELL_VERSION}-linux-amd64.zip && \
-    mv snell-server /usr/bin/ && rm snell-server-v${SNELL_VERSION}-linux-amd64.zip
-    # wget ${SNELL_URI} && \
-    # unzip snell-server-v${SNELL_VERSION}-linux-amd64.zip && \
-    # mv snell-server /usr/bin/ && rm snell-server-v${SNELL_VERSION}-linux-amd64.zip
+    mv snell-server /usr/bin/ && rm snell-server-v${SNELL_VERSION}-linux-amd64.zip && \
+    chmod +x /start.sh && \
+    yum remove -y wget unzip && \
+    yum clean all && rm -rf /var/cache/yum
 
 ENTRYPOINT /start.sh
